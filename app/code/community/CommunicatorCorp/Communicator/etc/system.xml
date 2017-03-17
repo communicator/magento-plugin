@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <tabs>
+        <communicator translate="label" module="communicator">
+            <label><![CDATA[Communicator]]></label>
+            <sort_order>200</sort_order>
+        </communicator>
+    </tabs>
+    <sections>
+        <communicator translate="label" module="communicator">
+            <label><![CDATA[General]]></label>
+            <show_in_default>1</show_in_default>
+            <show_in_store>1</show_in_store>
+            <show_in_website>1</show_in_website>
+            <sort_order>10</sort_order>
+            <tab>communicator</tab>
+            <groups>
+                <general translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[General]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <enabled translate="comment label">
+                            <comment><![CDATA[Please remember to save the configuration when enabling and disabling this extension.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <username translate="comment label">
+                            <comment><![CDATA[Your API username provided by Communicator.]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>text</frontend_type>
+                            <label><![CDATA[]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                        </username>
+                        <password translate="comment label">
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <comment><![CDATA[Your API password provided by Communicator.<br />The password is encrypted using the encryption key within the configuration before being persisted to the database.]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>obscure</frontend_type>
+                            <label><![CDATA[Password]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                        </password>
+                        <test_button translate="comment label">
+                            <comment><![CDATA[The test connection button uses the username and password stored in the database to ensure that it can connect to Communicator. When changing your credentials, please save the configuration before testing the connection.]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_model>communicator/adminhtml_system_config_form_testButton</frontend_model>
+                            <frontend_type>button</frontend_type>
+                            <label><![CDATA[Test]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                        </test_button>
+                        <enable_cron_insert_existing_data translate="label">
+                            <comment>
+                                <model>communicator/adminhtml_system_config_source_cron_comment</model>
+                                <method>getProgressString</method>
+                            </comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Synchronise Existing Data]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable_cron_insert_existing_data>
+                        <reset_button translate="comment label">
+                            <comment><![CDATA[Reset the synchronisation counters.]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                                <enable_cron_insert_existing_data>1</enable_cron_insert_existing_data>
+                            </depends>
+                            <frontend_model>communicator/adminhtml_system_config_form_resetButton</frontend_model>
+                            <frontend_type>button</frontend_type>
+                            <label><![CDATA[Reset Synchronisation]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>60</sort_order>
+                        </reset_button>
+                        <custom_cron translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Custom Schedule]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>80</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </custom_cron>
+                        <custom_time translate="label">
+                            <depends>
+                                <custom_cron>1</custom_cron>
+                            </depends>
+                            <frontend_type>time</frontend_type>
+                            <label><![CDATA[Synchronisation Time]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>90</sort_order>
+                        </custom_time>
+                        <custom_frequency translate="comment label">
+                            <comment><![CDATA[By default, existing data is synchronised every five minutes.]]></comment>
+                            <depends>
+                                <custom_cron>1</custom_cron>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Synchronisation Frequency]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>100</sort_order>
+                            <source_model>communicator/adminhtml_system_config_source_frequency</source_model>
+                        </custom_frequency>
+                        <custom_day translate="comment label">
+                            <comment><![CDATA[The day of the week that the synchronisation should occur.]]></comment>
+                            <depends>
+                                <custom_cron>1</custom_cron>
+                                <custom_frequency>W</custom_frequency>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Synchronisation Day]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>110</sort_order>
+                            <source_model>communicator/adminhtml_system_config_source_weekday</source_model>
+                        </custom_day>
+                    </fields>
+                </general>
+                <table translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Data Tables]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <contact translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Contact]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_table</source_model>
+                        </contact>
+                        <product translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Product]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_table</source_model>
+                        </product>
+                        <order translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Order]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_table</source_model>
+                        </order>
+                        <order_item translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Order Item]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_table</source_model>
+                        </order_item>
+                        <shipping translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Shipping]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                            <source_model>communicator/system_config_source_table</source_model>
+                        </shipping>
+                    </fields>
+                </table>
+                <list translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Mailing Lists]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <newsletter translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Newsletter]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_list</source_model>
+                        </newsletter>
+                        <transactional translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Transactional]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_list</source_model>
+                        </transactional>
+                        <abandoned_basket translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Abandoned Basket]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_list</source_model>
+                        </abandoned_basket>
+                    </fields>
+                </list>
+            </groups>
+        </communicator>
+        <communicator_mapping translate="label" module="communicator">
+            <label><![CDATA[Mappings]]></label>
+            <show_in_default>1</show_in_default>
+            <show_in_store>1</show_in_store>
+            <show_in_website>1</show_in_website>
+            <sort_order>20</sort_order>
+            <tab>communicator</tab>
+            <groups>
+                <contact translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Contact]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <email translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Email]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_column::getContactColumns</source_model>
+                        </email>
+                        <forename translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Forename]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_column::getContactColumns</source_model>
+                        </forename>
+                        <surname translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Surname]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_column::getContactColumns</source_model>
+                        </surname>
+                        <mobile translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Mobile]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                            <source_model>communicator/system_config_source_column::getContactColumns</source_model>
+                        </mobile>
+                        <last_order_date translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Last Order Date]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>communicator/system_config_source_column::getContactColumns</source_model>
+                        </last_order_date>
+                    </fields>
+                </contact>
+                <product translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Product]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>15</sort_order>
+                    <fields>
+                        <product_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Product ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_column::getProductColumns</source_model>
+                        </product_id>
+                        <product_description translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Description]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_column::getProductColumns</source_model>
+                        </product_description>
+                        <product_image translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Image]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_column::getProductColumns</source_model>
+                        </product_image>
+                    </fields>
+                </product>
+                <order translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Order]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <checkout_url translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Checkout URL]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>0</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </checkout_url>
+                        <quote_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Quote ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </quote_id>
+                        <order_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Order ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </order_id>
+                        <description translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Description]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>25</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </description>
+                        <status translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Status]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </status>
+                        <email translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Email]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </email>
+                        <address_1 translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Address Line 1]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </address_1>
+                        <address_2 translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Address Line 2]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>60</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </address_2>
+                        <town translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Town]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>70</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </town>
+                        <postcode translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Postcode]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>80</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </postcode>
+                        <county translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[County]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>90</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </county>
+                        <recommendation_1 translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Recommendation 1]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>92</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </recommendation_1>
+                        <recommendation_2 translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Recommendation 2]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>94</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </recommendation_2>
+                        <recommendation_3 translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Recommendation 3]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>96</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </recommendation_3>
+                        <postage translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Postage]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>100</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </postage>
+                        <vat translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[VAT]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>110</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </vat>
+                        <subtotal translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Subtotal]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>115</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </subtotal>
+                        <total translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Total]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>120</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </total>
+                        <created_at translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Created At]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>130</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderColumns</source_model>
+                        </created_at>
+                    </fields>
+                </order>
+                <order_item translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Order Item]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <email translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Email]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </email>
+                        <product_name translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Product Name]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </product_name>
+                        <quote_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Quote ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </quote_id>
+                        <order_item_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Order Item ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </order_item_id>
+                        <product_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Product ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </product_id>
+                        <shipping_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Shipping ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>55</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </shipping_id>
+                        <quantity translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Quantity]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>60</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </quantity>
+                        <value translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Value]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>70</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </value>
+                        <total translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Total]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>80</sort_order>
+                            <source_model>communicator/system_config_source_column::getOrderItemColumns</source_model>
+                        </total>
+                    </fields>
+                </order_item>
+                <shipping translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Shipping]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>40</sort_order>
+                    <fields>
+                        <carrier translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Carrier]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </carrier>
+                        <email translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Email]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </email>
+                        <order_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Order ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </order_id>
+                        <shipping_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Shipping ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>40</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </shipping_id>
+                        <track_id translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Track ID]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>45</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </track_id>
+                        <tracking_number translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Tracking Number]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>communicator/system_config_source_column::getShippingColumns</source_model>
+                        </tracking_number>
+                    </fields>
+                </shipping>
+            </groups>
+        </communicator_mapping>
+        <communicator_event translate="label" module="communicator">
+            <label><![CDATA[Events]]></label>
+            <show_in_default>1</show_in_default>
+            <show_in_store>1</show_in_store>
+            <show_in_website>1</show_in_website>
+            <sort_order>20</sort_order>
+            <tab>communicator</tab>
+            <groups>
+                <subscriber translate="comment label">
+                    <comment><![CDATA[The subscriber events will synchronise newsletter subscribers to the contact table.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Subscribers]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>5</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getCustomerDispatches</source_model>
+                        </dispatch>
+                    </fields>
+                </subscriber>
+                <customer translate="comment label">
+                    <comment><![CDATA[The customer events will synchronise customers to the contact table.]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Customers]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getTransactionalDispatches</source_model>
+                        </dispatch>
+                    </fields>
+                </customer>
+                <product translate="comment label">
+                    <comment><![CDATA[]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Products]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>h
+                    <sort_order>15</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                    </fields>
+                </product>
+                <order translate="comment label">
+                    <comment><![CDATA[]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Orders]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getTransactionalDispatches</source_model>
+                        </dispatch>
+                        <recommendation_source translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Recommendation source]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>30</sort_order>
+                            <source_model>communicator/system_config_source_recommendation</source_model>
+                        </recommendation_source>
+                    </fields>
+                </order>
+                <abandoned_basket translate="comment label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[Abandoned Basket]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <comment>
+                                <model>communicator/adminhtml_system_config_source_cron_comment</model>
+                                <method>getAbandonedBasketProgressString</method>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <interval translate="comment label">
+                            <comment><![CDATA[The number of minutes between the customer leaving the website and receiving the abandoned basket notification.]]></comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Interval]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_interval</source_model>
+                        </interval>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>50</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getAbandonedBasketDispatches</source_model>
+                        </dispatch>
+                    </fields>
+                </abandoned_basket>
+                <invoice translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[New Invoice]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>40</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getTransactionalDispatches</source_model>
+                        </dispatch>
+                    </fields>
+                </invoice>
+                <shipment translate="label">
+                    <frontend_type>text</frontend_type>
+                    <label><![CDATA[New Shipment]]></label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_store>1</show_in_store>
+                    <show_in_website>1</show_in_website>
+                    <sort_order>50</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Enabled]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                        <dispatch translate="label">
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[Dispatch]]></label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_store>1</show_in_store>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>20</sort_order>
+                            <source_model>communicator/system_config_source_dispatch::getTransactionalDispatches</source_model>
+                        </dispatch>
+                    </fields>
+                </shipment>
+            </groups>
+        </communicator_event>
+    </sections>
+</config>

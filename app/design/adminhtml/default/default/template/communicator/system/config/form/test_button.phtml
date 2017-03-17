@@ -1,0 +1,36 @@
+<?php
+
+/*
+ * CommunicatorCorp\Communicator
+ *
+ * Copyright © 2015 – 2016 Rippleffect Studio Ltd
+ * Rights reserved.
+ */
+
+?>
+<script type="text/javascript">
+    /**
+     * Tests the connection to the Communicator API.
+     *
+     * @return {Boolean}
+     */
+    function testCommunicatorConnection()
+    {
+        new Ajax.Request('<?php echo $this->getAjaxTestCommunicatorConnectionUrl(); ?>', {
+            method: 'get',
+            onSuccess: function (response) {
+                var status = JSON.parse(response.responseText);
+
+                if ('undefined' !== typeof status.connected && status.connected) {
+                    alert('Successfully connected to Communicator.');
+                } else {
+                    alert('Could not connect to Communicator with the given credentials.');
+                }
+            },
+            onFailure: function (response) {
+                alert('Could not connect to Communicator.');
+            }
+        });
+    }
+</script>
+<?php echo $this->getButtonHtml();

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <communicator translate="title">
+                                        <title><![CDATA[Communicator General Configuration]]></title>
+                                    </communicator>
+                                    <communicator_mapping translate="title">
+                                        <title><![CDATA[Communicator Mappings]]></title>
+                                    </communicator_mapping>
+                                    <communicator_event translate="title">
+                                        <title><![CDATA[Communicator Events]]></title>
+                                    </communicator_event>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
