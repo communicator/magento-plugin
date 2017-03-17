@@ -1,5 +1,5 @@
 {
-	"name": "communicator/magento",
+	"name": "communicator/magento-plugin",
 	"type": "magento-module",
 	"license": "Closed Source",
 	"homepage": "http://communicatorcorp.com",
