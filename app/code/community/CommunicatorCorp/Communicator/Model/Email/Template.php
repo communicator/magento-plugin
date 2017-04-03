@@ -18,7 +18,7 @@
  * @package CommunicatorCorp\Communicator
  * @author  Daniel Morris <daniel@rippleffect.com>
  */
-class CommunicatorCorp_Communicator_Model_Email_Template extends Mage_Core_Model_Email_Template
+class CommunicatorCorp_Communicator_Model_Email_Template extends Aschroder_SMTPPro_Model_Email_Template
 {
     /**
      * {@inheritDoc}
