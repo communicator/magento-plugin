@@ -9,6 +9,7 @@
 		"email": "support@communicatorcorp.com"
 	}],
 	"require": {
+		"aschroder/smtp_pro": "^2",
 		"magento-hackathon/magento-composer-installer": "*"
 	},
 	"extra": {
