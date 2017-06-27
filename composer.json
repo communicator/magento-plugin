@@ -10,7 +10,7 @@
 	}],
 	"require": {
 		"magento-hackathon/magento-composer-installer": "*",
-    	"communicator/webservices-php": "*"
+    	"communicator/webservices-php": "1.*"
 	},
 	"extra": {
 		"map": [
