@@ -9,7 +9,8 @@
 		"email": "support@communicatorcorp.com"
 	}],
 	"require": {
-		"magento-hackathon/magento-composer-installer": "*"
+		"magento-hackathon/magento-composer-installer": "*",
+    	"communicator/webservices-php": "*"
 	},
 	"extra": {
 		"map": [
