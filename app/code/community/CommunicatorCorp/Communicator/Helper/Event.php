@@ -1139,10 +1139,10 @@ class CommunicatorCorp_Communicator_Helper_Event extends CommunicatorCorp_Commun
                 ;
 
                 array_push($columns, $recommendationColumnMapping);
-            }
 
-            if (self::MAX_RECOMMENDATIONS === $columns) {
-                break;
+                if (self::MAX_RECOMMENDATIONS === count($columns)) {
+                    break 2;
+                }
             }
         }
 
