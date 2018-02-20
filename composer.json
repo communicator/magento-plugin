@@ -1,7 +1,7 @@
 {
 	"name": "communicator/magento-plugin",
 	"type": "magento-module",
-	"license": "Closed Source",
+	"license": "Unlicense",
 	"homepage": "http://communicatorcorp.com",
 	"description": "Magento extension to integrate into the Communicator Platform.",
 	"authors": [{
@@ -10,7 +10,7 @@
 	}],
 	"require": {
 		"magento-hackathon/magento-composer-installer": "*",
-    	"communicator/webservices-php": "^1"
+    		"communicator/webservices-php": "^1"
 	},
 	"extra": {
 		"map": [
