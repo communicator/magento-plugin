@@ -1,7 +1,7 @@
 {
 	"name": "communicator/magento-plugin",
 	"type": "magento-module",
-	"license": "Unlicense",
+	"license": "proprietary",
 	"homepage": "http://communicatorcorp.com",
 	"description": "Magento extension to integrate into the Communicator Platform.",
 	"authors": [{
