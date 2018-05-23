@@ -43,7 +43,14 @@ abstract class CommunicatorCorp_Communicator_Model_System_Config_Source_Abstract
         }
 
         try {
-            foreach ($this->getData() as $option) {
+            // TODO: API sends back an object if there's only one result. We'll need to
+            // handle this case otherwise we'll error out trying to loop over the object.
+            $data = $this->getData();
+            if (!is_array($data)) {
+                $data = [$data];
+            }
+
+            foreach ($data as $option) {
                 $value = $option->{sprintf('get%s', $this->getValueProperty())}();
                 $label = $option->{sprintf('get%s', $this->getLabelProperty())}();
 
