@@ -43,6 +43,11 @@ abstract class CommunicatorCorp_Communicator_Model_System_Config_Source_Abstract
         }
 
         try {
+            $data = $this->getData();
+            if ($data == NULL) {
+                return $options;
+            }
+
             // TODO: API sends back an object if there's only one result. We'll need to
             // handle this case otherwise we'll error out trying to loop over the object.
             $data = $this->getData();
